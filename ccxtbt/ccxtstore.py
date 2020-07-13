@@ -135,8 +135,8 @@ class CCXTStore(with_metaclass(MetaSingleton, object)):
         @wraps(method)
         def retry_method(self, *args, **kwargs):
             for i in range(self.retries):
-                if self.debug:
-                    print('{} - {} - Attempt {}'.format(datetime.now(), method.__name__, i))
+#                 if self.debug:
+#                     print('{} - {} - Attempt {}'.format(datetime.now(), method.__name__, i))
                 time.sleep(self.exchange.rateLimit / 1000)
                 try:
                     return method(self, *args, **kwargs)
@@ -182,8 +182,8 @@ class CCXTStore(with_metaclass(MetaSingleton, object)):
 
     @retry
     def fetch_ohlcv(self, symbol, timeframe, since, limit, params={}):
-        if self.debug:
-            print('Fetching: {}, TF: {}, Since: {}, Limit: {}'.format(symbol, timeframe, since, limit))
+#         if self.debug:
+#             print('Fetching: {}, TF: {}, Since: {}, Limit: {}'.format(symbol, timeframe, since, limit))
         return self.exchange.fetch_ohlcv(symbol, timeframe=timeframe, since=since, limit=limit, params=params)
 
     @retry
