@@ -223,6 +223,7 @@ class CCXTBroker(with_metaclass(MetaCCXTBroker, BrokerBase)):
         # Extract CCXT specific params if passed to the order
         params = params['params'] if 'params' in params else params
         params['created'] = created  # Add timestamp of order creation for backtesting
+        params = {} # avoid errors with binance
         ret_ord = self.store.create_order(symbol=data.p.dataname, order_type=order_type, side=side,
                                           amount=amount, price=price, params=params)
 
